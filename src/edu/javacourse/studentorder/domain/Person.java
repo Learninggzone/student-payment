@@ -13,6 +13,14 @@ public abstract class Person {
         System.out.println("Person is created");
     }
 
+    public Person(String firstname, String lastname, String patronymic, LocalDate dateOfBirth) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.patronymic = patronymic;
+        this.dateOfBirth = dateOfBirth;
+        System.out.println(this);
+    }
+
     public String getFirstname() {
         return firstname;
     }
@@ -51,5 +59,15 @@ public abstract class Person {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", patronymic='" + patronymic + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                '}';
     }
 }

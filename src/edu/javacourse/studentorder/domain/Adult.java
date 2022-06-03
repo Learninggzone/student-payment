@@ -11,6 +11,7 @@ public class Adult extends Person{
     private String studentId;
 
     public Adult() {
+        super("Dima","Makarov","Ovic",null);
         System.out.println("Adult is created");
     }
 
