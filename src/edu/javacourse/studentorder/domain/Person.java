@@ -18,7 +18,6 @@ public abstract class Person {
         this.lastname = lastname;
         this.patronymic = patronymic;
         this.dateOfBirth = dateOfBirth;
-        System.out.println(this);
     }
 
     public String getFirstname() {

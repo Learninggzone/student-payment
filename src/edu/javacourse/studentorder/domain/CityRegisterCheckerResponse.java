@@ -4,6 +4,9 @@ public class CityRegisterCheckerResponse {
     private boolean success;
     private Boolean temporal;
 
+    public CityRegisterCheckerResponse() {
+    }
+
     public CityRegisterCheckerResponse(boolean success, Boolean temporal) {
         this.success = success;
         this.temporal = temporal;
@@ -23,5 +26,13 @@ public class CityRegisterCheckerResponse {
 
     public void setTemporal(Boolean temporal) {
         this.temporal = temporal;
+    }
+
+    @Override
+    public String toString() {
+        return "CityRegisterCheckerResponse{" +
+                "success=" + success +
+                ", temporal=" + temporal +
+                '}';
     }
 }

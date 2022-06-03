@@ -9,7 +9,7 @@ public class CityRegisterValidator {
     private CityRegisterChecker personChecker;
 
     public CityRegisterValidator(){
-        this.personChecker = new RealCityRegisterChecker();
+        this.personChecker = new FakeCityRegisterChecker();
     }
 
     public AnswerCityRegister checkCityRegister(StudentOrder studentOrder){
