@@ -65,4 +65,14 @@ public class Adult extends Person{
     public void setStudentId(String studentId) {
         this.studentId = studentId;
     }
+
+    @Override
+    public String toString() {
+        return "Adult{" +
+                "passportSeria='" + passportSeria + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", patronymic='" + patronymic + '\'' +
+                '}';
+    }
 }

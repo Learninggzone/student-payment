@@ -2,10 +2,14 @@ package edu.javacourse.studentorder;
 
 import edu.javacourse.studentorder.domain.*;
 import edu.javacourse.studentorder.mail.MailSender;
+import edu.javacourse.studentorder.register.AnswerCityRegister;
 import edu.javacourse.studentorder.validator.ChildrenValidator;
 import edu.javacourse.studentorder.validator.CityRegisterValidator;
 import edu.javacourse.studentorder.validator.StudentValidator;
 import edu.javacourse.studentorder.validator.WeddingValidator;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class StudentOrderValidator {
 
@@ -29,9 +33,9 @@ public class StudentOrderValidator {
     }
 
     public void checkAll(){
-        StudentOrder[] studentOrderArr = readStudentOrder();
+        List<StudentOrder> studentOrderList = readStudentOrder();
 
-        for(StudentOrder studentOrder: studentOrderArr)
+        for(StudentOrder studentOrder: studentOrderList)
             checkOneOrder(studentOrder);
     }
 
@@ -43,11 +47,11 @@ public class StudentOrderValidator {
 //        sendMail(studentOrder);
     }
 
-    public StudentOrder[] readStudentOrder(){
-        StudentOrder[] studentOrderArr = new StudentOrder[3];
-        for (int i = 0; i < studentOrderArr.length; i++)
-            studentOrderArr[i] = SaveStudentOrder.buildStudentOrder(i);
-        return studentOrderArr;
+    public List<StudentOrder> readStudentOrder(){
+        List<StudentOrder> studentOrderList = new LinkedList<>();
+        for (int i = 0; i < 5; i++)
+            studentOrderList.add(SaveStudentOrder.buildStudentOrder(i));
+        return studentOrderList;
     }
 
     public AnswerCityRegister checkCityRegister(StudentOrder studentOrder){
