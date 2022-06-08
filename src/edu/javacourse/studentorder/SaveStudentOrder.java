@@ -2,10 +2,26 @@ package edu.javacourse.studentorder;
 
 import edu.javacourse.studentorder.domain.*;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.time.LocalDate;
 
 public class SaveStudentOrder {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+        Class.forName("org.postgresql.Driver");
+        Connection connection = DriverManager.getConnection(
+                "jdbc:postgresql://192.168.1.36:5432/student_payment",
+                "postgres", "zvE9M+-3US"
+        );
+
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT * from public.jc_street");
+
+        while (resultSet.next()){
+            System.out.println(resultSet.getLong(1) + " : " + resultSet.getString(2));
+        }
     }
 
     static void scheduleStudentOrder(){
