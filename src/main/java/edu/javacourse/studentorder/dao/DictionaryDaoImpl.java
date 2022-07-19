@@ -1,6 +1,5 @@
 package edu.javacourse.studentorder.dao;
 
-import edu.javacourse.studentorder.config.Config;
 import edu.javacourse.studentorder.domain.CountryArea;
 import edu.javacourse.studentorder.domain.PassportOffice;
 import edu.javacourse.studentorder.domain.RegisterOffice;
@@ -8,7 +7,6 @@ import edu.javacourse.studentorder.domain.Street;
 import edu.javacourse.studentorder.exception.DaoException;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -32,11 +30,7 @@ public class DictionaryDaoImpl implements DictionaryDao
 
     // TODO refactoring - make one method
     private Connection getConnection() throws SQLException {
-        Connection con = DriverManager.getConnection(
-                Config.getProperty(Config.DB_URL),
-                Config.getProperty(Config.DB_LOGIN),
-                Config.getProperty(Config.DB_PASSWORD));
-        return con;
+        return ConnectionBuilder.getConnection();
     }
 
     public List<Street> findStreets(String pattern) throws DaoException {

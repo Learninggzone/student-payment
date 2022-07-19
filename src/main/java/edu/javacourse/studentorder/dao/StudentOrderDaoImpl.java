@@ -5,7 +5,6 @@ import edu.javacourse.studentorder.domain.*;
 import edu.javacourse.studentorder.exception.DaoException;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -85,11 +84,7 @@ public class StudentOrderDaoImpl implements StudentOrderDao
 
     // TODO refactoring - make one method
     private Connection getConnection() throws SQLException {
-        Connection con = DriverManager.getConnection(
-                Config.getProperty(Config.DB_URL),
-                Config.getProperty(Config.DB_LOGIN),
-                Config.getProperty(Config.DB_PASSWORD));
-        return con;
+        return ConnectionBuilder.getConnection();
     }
 
     @Override
