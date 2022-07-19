@@ -2,12 +2,12 @@ package edu.javacourse.studentorder.validator;
 
 import edu.javacourse.studentorder.domain.Child;
 import edu.javacourse.studentorder.domain.Person;
+import edu.javacourse.studentorder.domain.register.AnswerCityRegister;
+import edu.javacourse.studentorder.domain.register.AnswerCityRegisterItem;
+import edu.javacourse.studentorder.domain.register.CityRegisterResponse;
 import edu.javacourse.studentorder.exception.TransportException;
-import edu.javacourse.studentorder.register.AnswerCityRegister;
 import edu.javacourse.studentorder.domain.StudentOrder;
 import edu.javacourse.studentorder.exception.CityRegisterException;
-import edu.javacourse.studentorder.register.AnswerCityRegisterItem;
-import edu.javacourse.studentorder.register.CityRegisterResponse;
 import edu.javacourse.studentorder.validator.register.CityRegisterChecker;
 import edu.javacourse.studentorder.validator.register.FakeCityRegisterChecker;
 
@@ -51,7 +51,7 @@ public class CityRegisterValidator {
             error = new AnswerCityRegisterItem.CityError(IN_CODE, exception.getMessage());
         }
 
-        AnswerCityRegisterItem item = new AnswerCityRegisterItem(person, status, error);
+        AnswerCityRegisterItem item = new AnswerCityRegisterItem(status, person, error);
         System.out.println(item);
         return item;
     }

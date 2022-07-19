@@ -1,76 +1,87 @@
 package edu.javacourse.studentorder;
 
 import edu.javacourse.studentorder.domain.*;
+import edu.javacourse.studentorder.domain.children.AnswerChildren;
+import edu.javacourse.studentorder.domain.register.AnswerCityRegister;
+import edu.javacourse.studentorder.domain.student.AnswerStudent;
+import edu.javacourse.studentorder.domain.wedding.AnswerWedding;
 import edu.javacourse.studentorder.mail.MailSender;
-import edu.javacourse.studentorder.register.AnswerCityRegister;
 import edu.javacourse.studentorder.validator.ChildrenValidator;
 import edu.javacourse.studentorder.validator.CityRegisterValidator;
 import edu.javacourse.studentorder.validator.StudentValidator;
 import edu.javacourse.studentorder.validator.WeddingValidator;
+import edu.javacourse.studentorder.domain.StudentOrder;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class StudentOrderValidator {
-
-    private CityRegisterValidator cityRegisterValidator;
-    private WeddingValidator weddingValidator;
-    private ChildrenValidator childrenValidator;
-    private StudentValidator studentValidator;
+public class StudentOrderValidator
+{
+    private CityRegisterValidator cityRegisterVal;
+    private WeddingValidator weddingVal;
+    private ChildrenValidator childrenVal;
+    private StudentValidator studentVal;
     private MailSender mailSender;
 
-    public StudentOrderValidator(){
-        cityRegisterValidator = new CityRegisterValidator();
-        weddingValidator = new WeddingValidator();
-        childrenValidator = new ChildrenValidator();
-        studentValidator = new StudentValidator();
+    public StudentOrderValidator() {
+        cityRegisterVal = new CityRegisterValidator();
+        weddingVal = new WeddingValidator();
+        childrenVal = new ChildrenValidator();
+        studentVal = new StudentValidator();
         mailSender = new MailSender();
     }
 
     public static void main(String[] args) {
-        StudentOrderValidator studentOrderValidator = new StudentOrderValidator();
-        studentOrderValidator.checkAll();
+        StudentOrderValidator sov = new StudentOrderValidator();
+        sov.checkAll();
     }
 
-    public void checkAll(){
-        List<StudentOrder> studentOrderList = readStudentOrder();
+    public void checkAll() {
+        List<StudentOrder> soList = readStudentOrders();
 
-        for(StudentOrder studentOrder: studentOrderList)
-            checkOneOrder(studentOrder);
+        for (StudentOrder so : soList) {
+            checkOneOrder(so);
+        }
     }
 
-    public void checkOneOrder(StudentOrder studentOrder){
-        AnswerCityRegister answerCityRegister = checkCityRegister(studentOrder);
-//        AnswerWedding answerWedding = checkWedding(studentOrder);
-//        AnswerChildren answerChildren = checkChildren(studentOrder);
-//        AnswerStudent answerStudent = checkStudent(studentOrder);
-//        sendMail(studentOrder);
+    public List<StudentOrder> readStudentOrders() {
+        List<StudentOrder> soList = new LinkedList<>();
+
+        for (int c = 0; c < 5; c++) {
+            StudentOrder so = SaveStudentOrder.buildStudentOrder(c);
+            soList.add(so);
+        }
+
+        return soList;
     }
 
-    public List<StudentOrder> readStudentOrder(){
-        List<StudentOrder> studentOrderList = new LinkedList<>();
-        for (int i = 0; i < 5; i++)
-            studentOrderList.add(SaveStudentOrder.buildStudentOrder(i));
-        return studentOrderList;
+    public void checkOneOrder(StudentOrder so) {
+        AnswerCityRegister cityAnswer = checkCityRegister(so);
+
+//        AnswerWedding wedAnswer = checkWedding(so);
+//        AnswerChildren childAnswer = checkChildren(so);
+//        AnswerStudent studentAnswer = checkStudent(so);
+
+//        sendMail(so);
     }
 
-    public AnswerCityRegister checkCityRegister(StudentOrder studentOrder){
-        return cityRegisterValidator.checkCityRegister(studentOrder);
+    public AnswerCityRegister checkCityRegister(StudentOrder so) {
+        return cityRegisterVal.checkCityRegister(so);
     }
 
-    public AnswerWedding checkWedding(StudentOrder studentOrder){
-        return weddingValidator.checkWedding(studentOrder);
+    public AnswerWedding checkWedding(StudentOrder so) {
+        return weddingVal.checkWedding(so);
     }
 
-    public AnswerChildren checkChildren(StudentOrder studentOrder){
-        return childrenValidator.checkChildren(studentOrder);
+    public AnswerChildren checkChildren(StudentOrder so) {
+        return childrenVal.checkChildren(so);
     }
 
-    public AnswerStudent checkStudent(StudentOrder studentOrder){
-        return studentValidator.checkStudent(studentOrder);
+    public AnswerStudent checkStudent(StudentOrder so) {
+        return studentVal.checkStudent(so);
     }
 
-    public void sendMail(StudentOrder studentOrder){
-        mailSender.sendMail(studentOrder);
+    public void sendMail(StudentOrder so) {
+        mailSender.sendMail(so);
     }
 }
